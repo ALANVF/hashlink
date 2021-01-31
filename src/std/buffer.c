@@ -393,3 +393,11 @@ HL_PRIM uchar *hl_to_string( vdynamic *v ) {
 	hl_buffer_char(b,0);
 	return hl_buffer_content(b,NULL);
 }
+
+#define _BUFFER _ABSTRACT(hl_buffer)
+DEFINE_PRIM_WITH_NAME( _BUFFER, hl_alloc_buffer, _NO_ARG, buffer_alloc );
+DEFINE_PRIM( _VOID, buffer_val, _BUFFER _DYN );
+DEFINE_PRIM( _VOID, buffer_char, _BUFFER _I32 );
+DEFINE_PRIM( _VOID, buffer_str, _BUFFER _BYTES );
+DEFINE_PRIM( _I32, buffer_length, _BUFFER );
+DEFINE_PRIM( _BYTES, buffer_content, _BUFFER _REF(_I32) );
