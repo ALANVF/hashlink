@@ -558,6 +558,11 @@ HL_PRIM varray *hl_enum_parameters( venum *e ) {
 	return a;
 }
 
+HL_PRIM void hl_enum_set_parameter( venum *e, int i, vdynamic *v ) {
+	hl_enum_construct *c = e->t->tenum->constructs + e->index;
+	hl_write_dyn((char*)e+c->offsets[i],c->params[i],v,false);
+}
+
 DEFINE_PRIM(_BYTES, type_str, _TYPE);
 DEFINE_PRIM(_BYTES, type_name, _TYPE);
 DEFINE_PRIM(_I32, type_args_count, _TYPE);
@@ -569,4 +574,5 @@ DEFINE_PRIM(_ARR, type_enum_values, _TYPE);
 DEFINE_PRIM(_BOOL, type_enum_eq, _DYN _DYN);
 DEFINE_PRIM(_DYN, alloc_enum_dyn, _TYPE _I32 _ARR _I32);
 DEFINE_PRIM(_ARR, enum_parameters, _DYN);
+DEFINE_PRIM(_VOID, enum_set_parameter, _DYN _I32 _DYN);
 DEFINE_PRIM(_BOOL, type_set_global, _TYPE _DYN);
